@@ -37,6 +37,18 @@ npm install
 npm start
 ```
 
+## Install (Non-Technical Users)
+
+Preferred path:
+
+1. Download the latest `CopyPasta-*.dmg` from GitHub Releases.
+2. Open the `.dmg`.
+3. Drag `CopyPasta.app` into `Applications`.
+4. Launch CopyPasta from `Applications`.
+5. Grant Accessibility + Automation permissions when prompted.
+
+No terminal required.
+
 ## Daily Flow
 
 1. Copy normally (`Cmd + C`).
@@ -72,6 +84,30 @@ Run tests:
 ```bash
 npm test
 ```
+
+Build installer artifacts locally:
+
+```bash
+npm run dist:mac
+```
+
+Artifacts are written to `release/` (`.dmg` and `.zip`).
+
+## GitHub Release Automation
+
+This repo includes a release workflow:
+
+- File: `.github/workflows/release.yml`
+- Trigger: push a tag like `v0.1.0`
+- Output: macOS `.dmg` + `.zip` uploaded to GitHub Release
+
+Optional signing/notarization is supported when these secrets are set:
+
+- `APPLE_ID`
+- `APPLE_APP_SPECIFIC_PASSWORD`
+- `APPLE_TEAM_ID`
+- `CSC_LINK`
+- `CSC_KEY_PASSWORD`
 
 ## License
 

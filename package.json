@@ -7,7 +7,11 @@
     "start": "electron .",
     "dev": "electron .",
     "lint": "echo \"No linter configured yet\"",
-    "test": "node --test"
+    "test": "node --test",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac dmg zip",
+    "release:local": "npm run test && npm run dist:mac"
   },
   "keywords": [
     "clipboard",
@@ -17,7 +21,47 @@
   ],
   "author": "",
   "license": "MIT",
+  "build": {
+    "appId": "com.copypasta.app",
+    "productName": "CopyPasta",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "LICENSE",
+      "!test/**/*",
+      "!README.md"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "artifactName": "CopyPasta-${version}-${arch}.${ext}"
+    }
+  },
   "devDependencies": {
-    "electron": "^31.7.7"
+    "electron": "^31.7.7",
+    "electron-builder": "^26.8.1"
   }
 }

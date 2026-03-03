@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CopyPasta</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <div class="brand">
+          <h1>CopyPasta</h1>
+          <p>Windows-style clipboard history for macOS</p>
+        </div>
+        <div class="top-actions">
+          <button id="settingsBtn" class="ghost">Settings</button>
+          <button id="clearBtn" class="ghost">Clear</button>
+        </div>
+      </header>
+
+      <section class="search-wrap">
+        <input id="searchInput" type="text" placeholder="Search clipboard history..." autocomplete="off" />
+        <span class="hint">Esc closes</span>
+      </section>
+
+      <section id="historyList" class="history-list" aria-live="polite"></section>
+
+      <section id="settingsPanel" class="settings-panel hidden" aria-live="polite">
+        <div class="settings-header">
+          <h2>Settings</h2>
+          <button id="closeSettingsBtn" class="ghost">Close</button>
+        </div>
+        <label class="setting-row">
+          <span>Auto-paste on select</span>
+          <input id="autoPasteToggle" type="checkbox" />
+        </label>
+        <label class="setting-row">
+          <span>Cmd+Shift+V behavior</span>
+          <select id="shortcutBehaviorSelect">
+            <option value="window">Open Window</option>
+            <option value="tray-menu">Open Tray Menu</option>
+          </select>
+        </label>
+        <div class="permission-item">
+          <h3>Shortcut Test</h3>
+          <p id="shortcutTestStatus" class="muted">Not run yet.</p>
+          <div class="permission-actions">
+            <button id="testShortcutBtn">Simulate Cmd+Shift+V</button>
+          </div>
+        </div>
+        <div class="permission-grid">
+          <div class="permission-item">
+            <h3>Accessibility</h3>
+            <p id="accessibilityStatus">Checking...</p>
+            <div class="permission-actions">
+              <button id="requestAccessibilityBtn">Request</button>
+              <button id="openAccessibilityBtn" class="ghost">Open Panel</button>
+            </div>
+          </div>
+          <div class="permission-item">
+            <h3>Automation (System Events)</h3>
+            <p id="automationStatus">Unknown</p>
+            <div class="permission-actions">
+              <button id="checkAutomationBtn">Verify</button>
+              <button id="openAutomationBtn" class="ghost">Open Panel</button>
+            </div>
+          </div>
+        </div>
+        <p id="autopasteStatusLine" class="status-line"></p>
+        <div class="permission-item">
+          <h3>Tray Diagnostics</h3>
+          <p id="trayDiagSummary" class="muted">Not checked yet.</p>
+          <div class="permission-actions">
+            <button id="refreshTrayDiagBtn">Refresh</button>
+            <button id="recreateTrayBtn" class="ghost">Recreate Tray</button>
+          </div>
+          <pre id="trayDiagRaw" class="diag-raw hidden"></pre>
+        </div>
+      </section>
+    </main>
+    <script src="./renderer.js"></script>
+  </body>
+  </html>

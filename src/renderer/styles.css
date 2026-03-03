@@ -1,0 +1,337 @@
+:root {
+  color-scheme: light dark;
+  --titlebar-safe-top: 34px;
+  --titlebar-safe-left: 76px;
+  --bg: color-mix(in srgb, canvas 86%, transparent);
+  --panel: color-mix(in srgb, canvas 96%, transparent);
+  --line: color-mix(in srgb, canvastext 18%, transparent);
+  --line-soft: color-mix(in srgb, canvastext 10%, transparent);
+  --text: canvastext;
+  --muted: color-mix(in srgb, canvastext 55%, transparent);
+  --accent: #0a84ff;
+  --danger: #ff3b30;
+  --shadow: 0 12px 36px color-mix(in srgb, black 16%, transparent);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: transparent;
+}
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 100vh;
+  padding: calc(var(--titlebar-safe-top) + 8px) 14px 14px;
+  background: var(--bg);
+  backdrop-filter: saturate(1.2) blur(24px);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  min-height: 30px;
+  padding-left: var(--titlebar-safe-left);
+  -webkit-app-region: drag;
+}
+
+.top-actions {
+  display: flex;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.search-wrap {
+  position: relative;
+  -webkit-app-region: no-drag;
+}
+
+#searchInput {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  padding: 10px 62px 10px 11px;
+  outline: none;
+  font-size: 13px;
+}
+
+#searchInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.hint {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  max-height: 560px;
+  overflow-y: auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 13px;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, white 2%, transparent);
+  -webkit-app-region: no-drag;
+}
+
+.item {
+  padding: 10px 10px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 120ms ease;
+  -webkit-app-region: no-drag;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meta {
+  display: flex;
+  gap: 6px;
+  min-height: 18px;
+}
+
+.kind {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 10px;
+  color: color-mix(in srgb, var(--muted) 88%, transparent);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.item.active {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.item:hover {
+  background: color-mix(in srgb, canvastext 5%, transparent);
+}
+
+.item-text {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.35;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  opacity: 0.35;
+  transition: opacity 120ms ease;
+}
+
+.item:hover .actions,
+.item.active .actions {
+  opacity: 1;
+}
+
+button {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, canvas 86%, transparent);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 11px;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+  -webkit-app-region: no-drag;
+}
+
+button:hover {
+  background: color-mix(in srgb, canvastext 9%, transparent);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+button.pin.on {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+button.delete:hover {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--line));
+}
+
+button.ghost {
+  background: transparent;
+}
+
+.empty {
+  color: var(--muted);
+  padding: 26px 18px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.settings-panel {
+  position: absolute;
+  inset: 54px 12px 12px;
+  z-index: 10;
+  border: 1px solid var(--line-soft);
+  background: var(--panel);
+  border-radius: 13px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.setting-row select {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, canvas 88%, transparent);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  -webkit-app-region: no-drag;
+}
+
+input,
+select {
+  -webkit-app-region: no-drag;
+}
+
+.permission-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.permission-item {
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 9px;
+  background: color-mix(in srgb, canvas 92%, transparent);
+}
+
+.permission-item h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.permission-item p {
+  margin: 5px 0;
+  font-size: 11px;
+}
+
+.permission-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.status-line {
+  margin: 0;
+  font-size: 11px;
+}
+
+.ok {
+  color: #2d8a3f;
+}
+
+.warn {
+  color: #9a6700;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.diag-raw {
+  margin: 8px 0 0;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line-soft);
+  background: color-mix(in srgb, canvas 88%, transparent);
+  font-size: 10px;
+  line-height: 1.35;
+  max-height: 140px;
+  overflow: auto;
+}

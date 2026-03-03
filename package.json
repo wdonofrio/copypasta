@@ -1,0 +1,23 @@
+{
+  "name": "copypasta",
+  "version": "0.1.0",
+  "description": "Free and open-source Windows-style clipboard history for macOS",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "lint": "echo \"No linter configured yet\"",
+    "test": "node --test"
+  },
+  "keywords": [
+    "clipboard",
+    "macos",
+    "electron",
+    "open-source"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.7.7"
+  }
+}

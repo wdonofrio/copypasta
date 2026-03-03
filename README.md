@@ -37,19 +37,9 @@ npm install
 npm start
 ```
 
-## Install (Non-Technical Users)
-
-Preferred path:
-
-1. Download the latest `CopyPasta-*.dmg` from GitHub Releases.
-2. Open the `.dmg`.
-3. Drag `CopyPasta.app` into `Applications`.
-4. Launch CopyPasta from `Applications`.
-5. Grant Accessibility + Automation permissions when prompted.
-
-No terminal required.
-
 ## Install via Homebrew Cask
+
+Recommended:
 
 ```bash
 brew tap wdonofrio/copypasta
@@ -62,6 +52,15 @@ Notes:
 - It downloads from the latest GitHub Release assets:
   - `CopyPasta-arm64.dmg`
   - `CopyPasta-x64.dmg`
+
+## Install via DMG (Unsigned Fallback)
+
+1. Download the latest `CopyPasta-*.dmg` from GitHub Releases.
+2. Open the `.dmg`.
+3. Drag `CopyPasta.app` into `Applications`.
+4. Launch CopyPasta from `Applications`.
+5. If macOS blocks launch, right-click app -> Open once to trust it.
+6. Grant Accessibility + Automation permissions when prompted.
 
 ## Daily Flow
 
@@ -106,22 +105,6 @@ npm run dist:mac
 ```
 
 Artifacts are written to `release/` (`.dmg` and `.zip`).
-
-## GitHub Release Automation
-
-This repo includes a release workflow:
-
-- File: `.github/workflows/release.yml`
-- Trigger: push a tag like `v0.1.0`
-- Output: macOS `.dmg` + `.zip` uploaded to GitHub Release
-
-Optional signing/notarization is supported when these secrets are set:
-
-- `APPLE_ID`
-- `APPLE_APP_SPECIFIC_PASSWORD`
-- `APPLE_TEAM_ID`
-- `CSC_LINK`
-- `CSC_KEY_PASSWORD`
 
 ## License
 

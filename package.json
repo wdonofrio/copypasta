@@ -10,7 +10,7 @@
     "test": "node --test",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "dist:mac": "electron-builder --mac dmg zip",
+    "dist:mac": "electron-builder --mac dmg zip --publish never",
     "release:local": "npm run test && npm run dist:mac"
   },
   "keywords": [

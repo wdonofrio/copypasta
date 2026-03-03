@@ -57,7 +57,7 @@
       "gatekeeperAssess": false
     },
     "dmg": {
-      "artifactName": "CopyPasta-${version}-${arch}.${ext}"
+      "artifactName": "CopyPasta-${arch}.${ext}"
     }
   },
   "devDependencies": {

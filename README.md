@@ -49,6 +49,20 @@ Preferred path:
 
 No terminal required.
 
+## Install via Homebrew Cask
+
+```bash
+brew tap wdonofrio/copypasta
+brew install --cask copypasta
+```
+
+Notes:
+
+- This uses `Casks/copypasta.rb` in this repo.
+- It downloads from the latest GitHub Release assets:
+  - `CopyPasta-arm64.dmg`
+  - `CopyPasta-x64.dmg`
+
 ## Daily Flow
 
 1. Copy normally (`Cmd + C`).

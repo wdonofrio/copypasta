@@ -10,6 +10,7 @@ contextBridge.exposeInMainWorld("copypasta", {
   getSettingsStatus: () => ipcRenderer.invoke("settings:getStatus"),
   setAutoPaste: (enabled) => ipcRenderer.invoke("settings:setAutoPaste", enabled),
   setShortcutBehavior: (behavior) => ipcRenderer.invoke("settings:setShortcutBehavior", behavior),
+  setLaunchAtLogin: (enabled) => ipcRenderer.invoke("settings:setLaunchAtLogin", enabled),
   checkAutomationPermission: () => ipcRenderer.invoke("permissions:checkAutomation"),
   requestAccessibilityPermission: () => ipcRenderer.invoke("permissions:requestAccessibility"),
   openPermissionPanel: (panel) => ipcRenderer.invoke("permissions:openPanel", panel),

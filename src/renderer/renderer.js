@@ -10,6 +10,7 @@ const settingsPanelEl = document.getElementById("settingsPanel");
 const closeSettingsBtnEl = document.getElementById("closeSettingsBtn");
 const autoPasteToggleEl = document.getElementById("autoPasteToggle");
 const shortcutBehaviorSelectEl = document.getElementById("shortcutBehaviorSelect");
+const launchAtLoginToggleEl = document.getElementById("launchAtLoginToggle");
 const shortcutTestStatusEl = document.getElementById("shortcutTestStatus");
 const testShortcutBtnEl = document.getElementById("testShortcutBtn");
 const accessibilityStatusEl = document.getElementById("accessibilityStatus");
@@ -58,6 +59,7 @@ async function refreshHistory() {
 function renderSettingsStatus(status) {
   autoPasteToggleEl.checked = Boolean(status.autoPasteEnabled);
   shortcutBehaviorSelectEl.value = status.shortcutBehavior === "tray-menu" ? "tray-menu" : "window";
+  launchAtLoginToggleEl.checked = Boolean(status.launchAtLogin);
 
   accessibilityStatusEl.textContent = status.accessibilityTrusted ? "Granted" : "Missing";
   accessibilityStatusEl.className = status.accessibilityTrusted ? "ok" : "warn";
@@ -260,6 +262,11 @@ shortcutBehaviorSelectEl.addEventListener("change", async () => {
   const status = await window.copypasta.setShortcutBehavior(shortcutBehaviorSelectEl.value);
   renderSettingsStatus(status);
   await refreshTrayDiagnostics();
+});
+
+launchAtLoginToggleEl.addEventListener("change", async () => {
+  const status = await window.copypasta.setLaunchAtLogin(launchAtLoginToggleEl.checked);
+  renderSettingsStatus(status);
 });
 
 requestAccessibilityBtnEl.addEventListener("click", async () => {

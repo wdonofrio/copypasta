@@ -565,11 +565,40 @@ function openPrivacyPanel(panel) {
   return true;
 }
 
+function getLaunchAtLogin() {
+  if (process.platform !== "darwin") {
+    return false;
+  }
+  try {
+    const settings = app.getLoginItemSettings();
+    return Boolean(settings.openAtLogin);
+  } catch {
+    return false;
+  }
+}
+
+function setLaunchAtLogin(enabled) {
+  if (process.platform !== "darwin") {
+    return false;
+  }
+  try {
+    app.setLoginItemSettings({
+      openAtLogin: Boolean(enabled),
+      openAsHidden: true
+    });
+    return true;
+  } catch (error) {
+    console.error("Failed to update launch-at-login setting:", error);
+    return false;
+  }
+}
+
 async function getSettingsStatus() {
   const accessibilityTrusted = isAccessibilityTrusted(false);
   return {
     autoPasteEnabled,
     shortcutBehavior,
+    launchAtLogin: getLaunchAtLogin(),
     autoPastePermissionBlocked,
     accessibilityTrusted,
     automationPermissionGranted,
@@ -907,6 +936,11 @@ function setupIpc() {
   ipcMain.handle("settings:setShortcutBehavior", (_event, behavior) => {
     const normalized = String(behavior || "").toLowerCase();
     shortcutBehavior = normalized === "tray-menu" ? "tray-menu" : "window";
+    return getSettingsStatus();
+  });
+
+  ipcMain.handle("settings:setLaunchAtLogin", (_event, enabled) => {
+    setLaunchAtLogin(Boolean(enabled));
     return getSettingsStatus();
   });
 

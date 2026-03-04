@@ -42,13 +42,14 @@ npm start
 Recommended:
 
 ```bash
-brew tap wdonofrio/copypasta
+brew tap wdonofrio/copypasta https://github.com/wdonofrio/copypasta
 brew install --cask copypasta
 ```
 
 Notes:
 
 - This uses `Casks/copypasta.rb` in this repo.
+- The explicit URL is required unless a dedicated `homebrew-copypasta` tap repo exists.
 - It downloads from the latest GitHub Release assets:
   - `CopyPasta-arm64.dmg`
   - `CopyPasta-x64.dmg`
@@ -59,8 +60,22 @@ Notes:
 2. Open the `.dmg`.
 3. Drag `CopyPasta.app` into `Applications`.
 4. Launch CopyPasta from `Applications`.
-5. If macOS blocks launch, right-click app -> Open once to trust it.
-6. Grant Accessibility + Automation permissions when prompted.
+5. If macOS says the app is damaged, run:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/CopyPasta.app
+```
+
+6. Then right-click `CopyPasta.app` -> `Open` once to trust it.
+7. Grant Accessibility + Automation permissions when prompted.
+
+## Run In Background After Restart
+
+In CopyPasta Settings, enable:
+
+- `Launch at login`
+
+CopyPasta will then start automatically after macOS restart and stay in the menu bar.
 
 ## Daily Flow
 
